@@ -9,13 +9,16 @@ import { PARCELS } from "../data/parcels";
 const PageWrapper = styled.div`
     position: relative;
     padding: 24px;
-    max-height: calc(100vh - 48px);
+    height: calc(100vh - 48px);
     display: flex;
     flex-direction: column;
 `
 
 const PageTitle = styled.h1`
-    margin-bottom: 24px;
+    margin-bottom: 12px;
+    font-size: 24px;
+    color: #534F5A;
+    font-weight: normal;
 `
 
 const ListWrapper = styled.div`

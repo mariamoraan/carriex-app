@@ -15,7 +15,6 @@ const CentralInfo = styled.div`
 `
 
 const Title = styled.p`
-    font-weight: bold;
     font-size: 18px;
     color: #534F5A;
 `
@@ -38,7 +37,6 @@ const Icon = styled.div`
 `
 
 const Delivery = styled.p<{isDelivered: boolean}>`
-    font-weight: bold;
     color: ${(props) => props.isDelivered ? '#B4B2B7' : 'red'};
     text-transform: uppercase;
     font-size: 12px;

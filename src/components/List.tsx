@@ -7,7 +7,7 @@ const ListWrapper = styled.ul`
     list-style: none;
 `
 const ListItem = styled.li`
-    padding: 12px;
+    padding: 12px 0;
     border-top: 1px solid #E7E6E8;
     &:nth-child(1) {
         border-top: none;

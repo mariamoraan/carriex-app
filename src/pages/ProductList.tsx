@@ -1,12 +1,11 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from "styled-components";
-import { AddButton } from '../components/AddButton';
+import { Button } from '../components/Button';
 import { List } from '../components/List';
-import { OrderItem } from '../components/OrderItem';
-import { PARCELS } from '../data/parcels';
-import { getNumberOfItemsFromParcel } from '../utils/parcels';
+import { ProductItem } from '../components/ProductItem';
+import { PARCELS } from "../data/parcels";
 
 const PageWrapper = styled.div`
     position: relative;
@@ -29,19 +28,10 @@ const Title = styled.h1`
     font-weight: normal;
 `
 
-const Description = styled.p`
-    font-size: 12px;
-    color: #534F5A;
-`
-
 const ListWrapper = styled.div`
     overflow: scroll;
     scroll-behaviour: smooth;
     flex: 1;
-`
-
-const NavLink = styled(Link)`
-    text-decoration: none;
 `
 
 const BottomWrapper = styled.div`
@@ -51,36 +41,35 @@ const BottomWrapper = styled.div`
     align-items: center;
 `
 
-const OrderLists = () => {
-    let {parcel} = useParams()
+const ProductList = () => {
+    let {parcel, order} = useParams()
     const [t] = useTranslation()
     const navigate = useNavigate();
-
+    
     return (
         <PageWrapper>
             <TitleWrapper onClick={() => navigate(-1)}>
                 <ArrowBackIcon />
-                <Title>{t("parcel_list")}</Title>
+                <Title>{`${order} ${t("parcel_list")}`}</Title>
             </TitleWrapper>
             {
-                    parcel && PARCELS[parcel] ?
-                    <>
-                    <Description>{t("items_to_be_picked_up", { items_number: getNumberOfItemsFromParcel(PARCELS[parcel])})}</Description>
+                    parcel && order && PARCELS[parcel].orders[order].products ?
                     <ListWrapper>
                         
-                            <List childrens={Object.values(PARCELS[parcel].orders).map((order) => ({
-                                key: order.id,
-                                elem: <NavLink to={`order/${order.id}`}><OrderItem  {...order}/></NavLink>
+                            <List childrens={Object.values(PARCELS[parcel].orders[order].products).map((product) => ({
+                                key: product.id,
+                                elem: <ProductItem  {...product}/>
                             }))} />
                             
                         
                     </ListWrapper>
-                    </>
                 : null
             }
-            <BottomWrapper><AddButton /></BottomWrapper>
+            <BottomWrapper>
+                <Button text={t('delivery')} onClick={() => {console.log("hey")}} />
+            </BottomWrapper>
         </PageWrapper>
     )
 }
 
-export default OrderLists
+export default ProductList

@@ -14,7 +14,6 @@ const CentralInfo = styled.div`
 `
 
 const Title = styled.p`
-    font-weight: bold;
     font-size: 18px;
     color: #534F5A;
 `
@@ -25,7 +24,6 @@ const Description = styled.p`
 `
 
 const Date = styled.p`
-    font-weight: bold;
     color: red;
     font-size: 12px;
 `

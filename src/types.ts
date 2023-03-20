@@ -1,13 +1,3 @@
-export type ListItemProps = {
-    key: string,
-    title: string,
-    description: string,
-    description2?: string,
-    isDelivered?: boolean,
-    icon?: JSX.Element,
-    date?: string
-}
-
 export interface IParcel {[key: string]: {
     key: string,
     date: Date,

@@ -8,6 +8,7 @@ import './i18n';
 import './index.css';
 import OrderLists from './pages/OrderLists';
 import ParcelLists from './pages/ParcelLists';
+import ProductList from './pages/ProductList';
 
 const router = createBrowserRouter([
   {
@@ -15,9 +16,13 @@ const router = createBrowserRouter([
     element: <ParcelLists />,
   },
   {
-    path: "parcel/:id",
+    path: "parcel/:parcel",
     element: <OrderLists />,
-  }
+  },
+  {
+    path: "parcel/:parcel/order/:order",
+    element: <ProductList />,
+  },
 ]);
 
 const root = ReactDOM.createRoot(

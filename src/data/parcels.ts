@@ -11,10 +11,11 @@ export const PARCELS: IParcel = {
             SK16812356 : {
                 id: "SK16812356",
                 company: "Seur",
-                isDelivered: true,
+                isDelivered: false,
                 products: {
-                    EDSFASLEDFKASEF: {id: "EDSFASLEDFKASEF", title: "FSDACSASDCS", weight: "100g", icon: ICONS.COMPUTER_ICON},
-                    HTHDTFHDHTDTHBTDTH: {id: "HTHDTFHDHTDTHBTDTH", title: "FSDACSASDCS", weight: "100g", icon: ICONS.PHONE_ICON}
+                    EDSFASLEDFKASEFKDR: {id: "EDSFASLEDFKASEFKDR", title: "FSDACSASDCS", weight: "100g", icon: ICONS.COMPUTER_ICON},
+                    HTHDTFHDHTDTHBTDTH: {id: "HTHDTFHDHTDTHBTDTH", title: "FSDACSASDCS", weight: "100g", icon: ICONS.PHONE_ICON},
+                    DFSDOIFJSDFJSDFJSF: {id: "DFSDOIFJSDFJSDFJSF", title: "FSDACSASDCS", weight: "100g", icon: ICONS.WATCH_ICON}
                 }
             },
             GFRGDFGVDF : {
