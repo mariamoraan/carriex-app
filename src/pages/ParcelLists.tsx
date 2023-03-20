@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { AddButton } from "../components/AddButton";
 import { List } from "../components/List";
@@ -30,15 +31,19 @@ const BottomWrapper = styled.div`
     align-items: center;
 `
 
+const NavLink = styled(Link)`
+    text-decoration: none;
+`
+
 const ParcelLists = () => {
     const [t] = useTranslation()
     return (
         <PageWrapper>
             <PageTitle>{t("parcel_lists")}</PageTitle>
             <ListWrapper>
-                <List childrens={PARCELS.map((parcel) => ({
+                <List childrens={Object.values(PARCELS).map((parcel) => ({
                     key: parcel.key,
-                    elem: <ParcelItem  {...parcel}/>
+                    elem: <NavLink to={`parcel/${parcel.key}`}><ParcelItem  {...parcel}/></NavLink>
                 }))} />
             </ListWrapper>
             <BottomWrapper><AddButton /></BottomWrapper>

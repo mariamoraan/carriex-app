@@ -1,36 +1,31 @@
 import { ICONS } from "../components/Icons";
 import { IParcel } from "../types";
 
-export const PARCELS: IParcel[] = [
-    {
+
+export const PARCELS: IParcel = {
+    DWSAZFCEDSFDESZFE: {
         key: "DWSAZFCEDSFDESZFE",
-        title: "Parcel List 02/11/2022", 
-        description: "4 carriers will pick up the parcel today", 
-        description2: "14 items",
-        date: "02/11/2022",
-        orders: [
-            {
-                key: "EDFDSFCSEFDESF",
-                title: "string",
-                company: "string",
-                description: "string",
-                delivery: true,
-                products: [
-                    {key: "EDSFASLEDFKASEF", title: "FSDACSASDCS", weight: "100g", icon: ICONS.COMPUTER_ICON},
-                    {key: "VTRETVRTRVVTETV", title: "FSDACSASDCS", weight: "100g", icon: ICONS.PHONE_ICON}
-                ]
+        carriers: 5,
+        date: new Date('03/20/2021'),
+        orders: {
+            SK16812356 : {
+                id: "SK16812356",
+                company: "Seur",
+                isDelivered: true,
+                products: {
+                    EDSFASLEDFKASEF: {id: "EDSFASLEDFKASEF", title: "FSDACSASDCS", weight: "100g", icon: ICONS.COMPUTER_ICON},
+                    HTHDTFHDHTDTHBTDTH: {id: "HTHDTFHDHTDTHBTDTH", title: "FSDACSASDCS", weight: "100g", icon: ICONS.PHONE_ICON}
+                }
             },
-            {
-                key: "BHTGHBTRHDT",
-                title: "string",
-                company: "string",
-                description: "string",
-                delivery: true,
-                products: [
-                    {key: "RFGRFGFRGRGVRFDG", title: "FSDACSASDCS", weight: "100g", icon: ICONS.COMPUTER_ICON},
-                    {key: "HTHDTFHDHTDTHBTDTH", title: "FSDACSASDCS", weight: "100g", icon: ICONS.PHONE_ICON}
-                ]
-            },
-        ]
-    },
-]
+            GFRGDFGVDF : {
+                id: "GFRGDFGVDF",
+                company: "Seur",
+                isDelivered: true,
+                products: {
+                    EDSFASLEDFKASEF: {id: "EDSFASLEDFKASEF", title: "FSDACSASDCS", weight: "100g", icon: ICONS.COMPUTER_ICON},
+                    HTHDTFHDHTDTHBTDTH: {id: "HTHDTFHDHTDTHBTDTH", title: "FSDACSASDCS", weight: "100g", icon: ICONS.PHONE_ICON}
+                }
+            }
+        }
+    }
+}

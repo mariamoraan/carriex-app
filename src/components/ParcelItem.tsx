@@ -1,5 +1,7 @@
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import { IParcel } from "../types";
+import { IParcelElem } from "../types";
+import { getNumberOfItemsFromParcel, usePickUpDateString } from "../utils/parcels";
 
 const Wrapper = styled.div`
     display: flex;
@@ -28,16 +30,23 @@ const Date = styled.p`
     font-size: 12px;
 `
 
-export const ParcelItem = (props: IParcel) => {
-    const {title, description, description2, date} = props
+export const ParcelItem = (props: IParcelElem) => {
+    const {date, carriers} = props
+    const [t, i18n] = useTranslation()
     return (
         <Wrapper>
             <CentralInfo>
-                <Title>{title}</Title>
-                <Description>{description}</Description>
-                <Description>{description2}</Description>
+                <Title>{t("parcel_list")} {date ? date.toLocaleDateString(i18n.language) : null}</Title>
+                { 
+                    carriers && date ? 
+                    <Description>
+                        {usePickUpDateString(carriers, date)} 
+                    </Description> 
+                    : null
+                }
+                <Description>{t("items", { items_number: getNumberOfItemsFromParcel(props)})}</Description>
             </CentralInfo>
-            <Date>{date}</Date>
+            {date ? <Date>{date.toLocaleDateString(i18n.language)}</Date> : null}
         </Wrapper>
     )
 }

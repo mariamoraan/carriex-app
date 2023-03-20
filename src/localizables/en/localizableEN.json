@@ -2,5 +2,12 @@
     "hey": "Heyyy !",
     "delivery": "Delivery",
     "delivered": "Delivered",
-    "parcel_lists": "Parcel Lists"
+    "carriers_will_pick_up": "{{items_number}} carriers will pick up the parcel",
+    "carriers_picked_up": "{{items_number}} carriers picked up the parcel",
+    "items_to_be_picked_up": "{{items_number}} items to be picked up",
+    "parcel_list": "Parcel List",
+    "parcel_lists": "Parcel Lists",
+    "items": "{{items_number}} items",
+    "today": "today",
+    "on_date": "on"
 }
