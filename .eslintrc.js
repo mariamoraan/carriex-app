@@ -3,7 +3,10 @@ module.exports = {
       es6: true,
       node: true,
       jest: true,
-      browser: true
+      browser: true,
+    },
+    globals: {
+        JSX: true,
     },
     extends: "eslint:recommended",
     parser: "@typescript-eslint/parser",
@@ -13,16 +16,16 @@ module.exports = {
       sourceType: "module",
     },
     rules: {
-      indent: ["error", 2],
-      "linebreak-style": ["error", "unix"],
-      quotes: ["error", "single"],
+      indent:  0,
+      "linebreak-style": 0,
+      quotes: 0,
       "no-console": "warn",
       "no-unused-vars": "off",
       "@typescript-eslint/no-unused-vars": [
         "error",
         { vars: "all", args: "after-used", ignoreRestSiblings: false },
       ],
-      "@typescript-eslint/explicit-function-return-type": "warn", // Consider using explicit annotations for object literals and function return types even when they can be inferred.
+      //"@typescript-eslint/explicit-function-return-type": "warn", // Consider using explicit annotations for object literals and function return types even when they can be inferred.
       "no-empty": "warn",
     },
 };
