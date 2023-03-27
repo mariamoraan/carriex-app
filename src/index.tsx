@@ -4,12 +4,26 @@ import {
   createBrowserRouter,
   RouterProvider
 } from "react-router-dom";
+import styled from 'styled-components';
 import './i18n';
 import './index.css';
 import OrderLists from './pages/OrderLists';
 import ParcelLists from './pages/ParcelLists';
 import ProductList from './pages/ProductList';
 import store from './redux/store';
+
+const AppWrapper = styled.div`
+  background-image: url("https://img.freepik.com/free-vector/vibrant-fluid-gradient-background-with-curvy-shapes_1017-32108.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  @media (min-width: 1000px) {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+`
 
 const router = createBrowserRouter([
   {
@@ -31,7 +45,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <Provider store={store}>
-    <RouterProvider router={router} />
+    <AppWrapper>
+      <RouterProvider router={router} />
+    </AppWrapper>
   </Provider>
 );
 

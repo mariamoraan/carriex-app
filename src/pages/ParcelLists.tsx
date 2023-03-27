@@ -20,17 +20,11 @@ const PageWrapper = styled.div`
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    background: rgba(255,255,255,0.8);
     @media (min-width: 1000px) {
         height: calc(100vh - 48px);
-        max-width: calc(100vh - 48px);
-        position: relative;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        margin: auto;
-        margin-top: 24px;
-        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        width: calc(100vh - 48px);
+        border-radius: 24px;
     }
 `
 
@@ -44,14 +38,15 @@ const PageTitle = styled.h1`
 
 const MiddleWrapper = styled.div`
     position: relative;
+    overflow: hidden;
     flex: 1;
 `
 
 const ListWrapper = styled.div`
     padding: 0 24px 0 24px;
-    overflow: scroll;
+    height: 100%;
+    overflow-y: auto;
     scroll-behaviour: smooth;
-    flex: 1;
 `
 
 const NoItemsWrapper = styled.div`
