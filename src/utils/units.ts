@@ -1,12 +1,7 @@
 import { useTranslation } from "react-i18next";
-import { PRODUCT_TYPES } from "../constants/products";
 
-export const getItemUnits = (type: string) => {
+export const getWeightWithUnits = (weight: number): string => {
     const [t] = useTranslation()
-    switch(type) {
-        case PRODUCT_TYPES.TELEVISION_ICON:
-            return t("KG_UNIT")
-        default:
-            return t("G_UNIT")
-    }
+    if (weight < 1000) return `${weight}${t("G_UNIT")}`
+    return `${weight/1000}${t("KG_UNIT")}`
 }

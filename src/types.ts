@@ -33,12 +33,3 @@ export interface IItem  {
     price: number,
     weigth: number
 }
-
-export interface IProduct {[key: string]: IProductElem}
-
-export interface IProductElem {
-    id: string,
-    title: string, 
-    weight: string,
-    icon?: string,
-}

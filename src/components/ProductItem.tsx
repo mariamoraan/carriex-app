@@ -1,6 +1,7 @@
+import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 import styled from "styled-components";
 import { IItem } from "../types";
-import { getItemUnits } from "../utils/units";
+import { getWeightWithUnits } from "../utils/units";
 import { ICONS } from "./Icons";
 
 const Wrapper = styled.div`
@@ -41,10 +42,10 @@ export const ProductItem = (props: IItem) => {
     const {weigth, type, id} = props
     return (
         <Wrapper>
-            <Icon>{ICONS[type]}</Icon>
+            <Icon>{ICONS[type] || <LabelImportantIcon />}</Icon>
             <CentralInfo>
                 <Title>{id.$oid}</Title>
-                <Description>{weigth}{getItemUnits(type)}</Description>
+                <Description>{getWeightWithUnits(weigth)}</Description>
             </CentralInfo>
         </Wrapper>
     )

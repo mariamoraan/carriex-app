@@ -8,8 +8,23 @@ export const parcelsSlice = createSlice({
   initialState: STARTER_PARCELS,
   reducers: {
     addParcel: (state: IParcels, action: PayloadAction<{id: string, carrier: string}>) => {
-        let newParcel = PARCELS_ITEMS.find((parcel) => parcel.id.$oid.toLocaleUpperCase() === action.payload.id.toLocaleUpperCase())
-        if (newParcel) state.push({...newParcel, carrier: action.payload.carrier})
+        if (state.find((parcel) => parcel.id.$oid.toLocaleUpperCase() === action.payload.id.toLocaleUpperCase())) return
+        let foundParcel = PARCELS_ITEMS.find((parcel) => parcel.id.$oid.toLocaleUpperCase() === action.payload.id.toLocaleUpperCase())
+        if (foundParcel) {
+          state.push({...foundParcel, carrier: action.payload.carrier})
+        } else {
+          let parcel: IParcel = {
+            id: { $oid: action.payload.id }, 
+            carrier: action.payload.carrier,
+            deliveryAdress: '',
+            deliveryDate: '',
+            pickupAdress: '',
+            pickupDate: '',
+            itemsCount: 0,
+            items: []
+          }
+          state.push(parcel)
+        }
     },
     deliverParcel: (state: IParcels, action: PayloadAction<{id: string, driverSignature: string}>) => {
       let index = state.findIndex((parcel) => parcel.id.$oid.toLocaleUpperCase() === action.payload.id.toLocaleUpperCase())

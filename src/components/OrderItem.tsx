@@ -50,7 +50,7 @@ export const OrderItem = ({carrier, isDelivered, itemsNumber}:{carrier: ICarrier
             <CentralInfo>
                 <Title>{`${(id.$oid).toLocaleUpperCase()} ${t("parcel_list")}`}</Title>
                 <Description>{companyName}</Description>
-                <Description>{t("items_to_be_picked_up", {items_number: itemsNumber})}</Description>
+                <Description>{t(`${itemsNumber > 1 ? "items_to_be_picked_up": "item_to_be_picked_up"}`, {items_number: itemsNumber})}</Description>
             </CentralInfo>
             {isDelivered != null ? <Delivery isDelivered={isDelivered}>{t(isDelivered ? "delivered": "delivery")}</Delivery> : null}
         </Wrapper>

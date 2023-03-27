@@ -7,6 +7,7 @@
     "carrier_will_pick_up": "{{items_number}} carrier will pick up the parcel",
     "carrier_picked_up": "{{items_number}} carrier picked up the parcel",
     "items_to_be_picked_up": "{{items_number}} items to be picked up",
+    "item_to_be_picked_up": "{{items_number}} item to be picked up",
     "parcel_list": "Parcel List",
     "parcel_lists": "Parcel Lists",
     "items": "{{items_number}} items",

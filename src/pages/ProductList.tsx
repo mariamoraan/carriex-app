@@ -172,7 +172,7 @@ const ProductList = () => {
         <PageWrapper>
             <TitleWrapper onClick={() => navigate(-1)}>
                 <ArrowBackIcon />
-                <Title>{`${currentParcel?.id.$oid} ${t("parcel_list")}`}</Title>
+                <Title>{`${currentParcel?.id.$oid.toLocaleUpperCase()} ${t("parcel_list")}`}</Title>
             </TitleWrapper>
             <MiddleWrapper>
             {

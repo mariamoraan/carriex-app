@@ -97,7 +97,7 @@ const OrderLists = () => {
             {
                 hasCarriers ?
                     <>
-                    <Description>{t("items_to_be_picked_up", { items_number: 4})}</Description>
+                    <Description>{t("items_to_be_picked_up", { items_number: currentParcel.itemsCount})}</Description>
                     <ListWrapper>
                         
                             <List childrens={carriers.map((order) => ({

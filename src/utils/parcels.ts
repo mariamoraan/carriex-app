@@ -26,5 +26,6 @@ export const usePickUpDateString = (itemsNumber: number, date: string): string =
 export const useDateLocaleString = (stringDate: string): string => {
     const [, i18n] = useTranslation()
     let date = new Date(stringDate)
-    return date.toLocaleDateString(i18n.language)
+    if (isNaN(date.getDate())) return ""
+    return date.toLocaleDateString(i18n.language)    
 }
