@@ -8,17 +8,18 @@ export const parcelsSlice = createSlice({
   initialState: STARTER_PARCELS,
   reducers: {
     addParcel: (state: IParcels, action: PayloadAction<{id: string, carrier: string}>) => {
-        let newParcel = PARCELS_ITEMS.find((parcel) => parcel.id.$oid === action.payload.id)
+        let newParcel = PARCELS_ITEMS.find((parcel) => parcel.id.$oid.toLocaleUpperCase() === action.payload.id.toLocaleUpperCase())
         if (newParcel) state.push({...newParcel, carrier: action.payload.carrier})
     },
-    setParcelToDelivered: (state: IParcels, action: PayloadAction<{id: string}>) => {
-      let index = state.findIndex((parcel) => parcel.id.$oid === action.payload.id)
+    deliverParcel: (state: IParcels, action: PayloadAction<{id: string, driverSignature: string}>) => {
+      let index = state.findIndex((parcel) => parcel.id.$oid.toLocaleUpperCase() === action.payload.id.toLocaleUpperCase())
       state[index].isDelivered = true
+      state[index].driverSignature = action.payload.driverSignature
     }
   },
 })
 
-export const { addParcel } = parcelsSlice.actions
+export const { addParcel, deliverParcel } = parcelsSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectParcels = (state: IParcel): IParcel => state

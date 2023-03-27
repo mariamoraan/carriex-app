@@ -20,11 +20,12 @@ const Label = styled.label`
 `
 
 export const CanvasInput = (props: ILabeledInput) => {
-    const {name, labelText} = props
+    const {name, labelText, onChangeString} = props
+    if (!onChangeString) return null
     return (
         <Wrapper>
             <Label htmlFor={name}>{labelText}</Label>
-            <Canvas />
+            <Canvas onChange={onChangeString} />
         </Wrapper>
     )
 }

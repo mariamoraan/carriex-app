@@ -37,9 +37,14 @@ const getOffsetLeft = (element: HTMLElement | null) => {
     return element?.parentElement?.offsetLeft || 0;
 }
 
-export const Canvas = () => {
+type Props = {
+    onChange: (e: string) => void
+}
+
+export const Canvas = ({onChange}: Props) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
     let canvas = canvasRef.current
+    let currentUrl = ""
     const [isDrawing, setIsDrawing] = useState(false)
     const [width, setWidth] = useState(canvas?.parentElement?.clientWidth || 1)
     const [offsetY, setOffsetY] = useState(getOffsetTop(canvas))
@@ -99,9 +104,17 @@ export const Canvas = () => {
         }
     }
      
-     function stopDrawing() {
+    function stopDrawing() {
         setIsDrawing(false)
-     }
+        let canvas = canvasRef.current;
+        let tagA = document.createElement("a");
+        document.body.appendChild(tagA);
+        if (!canvas) return
+        tagA.href = canvas.toDataURL();
+        currentUrl = tagA.href
+        onChange(currentUrl)
+        document.body.removeChild(tagA);
+    }
      
     
     return (

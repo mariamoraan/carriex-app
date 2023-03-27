@@ -1,5 +1,6 @@
 import { ChangeEvent } from "react";
 import styled from "styled-components";
+import { INPUT_TYPES } from "../constants/inputs";
 import { CanvasInput } from "./CanvasInput";
 import { SelectInput } from "./SelectInput";
 
@@ -28,16 +29,12 @@ const Input = styled.input`
 export type ILabeledInput = {
     name: string,
     onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
+    onChangeString?: (e: string) => void,
     labelText: string,
     inputType: string,
     inputValue: any,
     required?: boolean,
     options?: {value: string, text: string}[]
-}
-
-export const INPUT_TYPES = {
-    CANVAS: "CANVAS",
-    SELECT: "SELECT"
 }
 
 export const InputWithLabel = (props: ILabeledInput) => {
@@ -61,3 +58,6 @@ export const InputWithLabel = (props: ILabeledInput) => {
             )
     } 
 }
+
+export { INPUT_TYPES };
+

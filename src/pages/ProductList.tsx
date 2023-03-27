@@ -86,14 +86,14 @@ const BottomWrapper = styled.div`
     align-items: center;
 `
 
-let defaultDelivery: {driverName: string, driverLicensePlate: string, driverSignature: string} = {driverName: "", driverLicensePlate: "", driverSignature: ""}
-
 const ProductList = () => {
     let {parcel} = useParams()
     const [t] = useTranslation()
     const dispatch = useAppDispatch()
     const navigate = useNavigate();
     const currentParcel = useAppSelector((state) => state.parcels.find((parcelItem) => parcelItem.id.$oid === parcel))
+    const carrier = useAppSelector((state) => state.carriers.find((carrierItem) => carrierItem.id.$oid === currentParcel?.carrier))
+    let defaultDelivery: {driverName: string, driverLicensePlate: string, driverSignature: string} = {driverName: carrier?.driver || "", driverLicensePlate: carrier?.licensePlate || "", driverSignature: ""} 
     const itemIds = currentParcel?.items.map((item) => item.$oid)
     const products = ITEMS.filter((product) => itemIds?.includes(product.id.$oid))
     let hasProducts = currentParcel && currentParcel?.itemsCount > 0
@@ -114,7 +114,7 @@ const ProductList = () => {
     const handleSubmit = (event: FormEvent<HTMLElement>) => {
         event.preventDefault()
         if (!currentParcel) return
-        dispatch(parcelsSlice.actions.setParcelToDelivered({id: currentParcel?.id.$oid}))
+        dispatch(parcelsSlice.actions.deliverParcel({id: currentParcel?.id.$oid, driverSignature: delivery.driverSignature}))
         setDelivery(defaultDelivery)
         setIsMenuOpen(false)
         setShowDialog(true)
@@ -144,7 +144,7 @@ const ProductList = () => {
                         onChange: (e) => setDelivery((prev) => ({...prev, driverLicensePlate: e.target.value})), 
                         labelText: "License plate", 
                         inputType: "text", 
-                        inputValue: delivery.driverLicensePlate,
+                        inputValue: delivery.driverLicensePlate.toUpperCase(),
                         required: true,
                     },
                 ]
@@ -160,6 +160,7 @@ const ProductList = () => {
                         inputType: INPUT_TYPES.CANVAS, 
                         inputValue: delivery.driverSignature,
                         required: true,
+                        onChangeString: (e) => setDelivery((prev) => ({...prev, driverSignature: e})), 
                     },
                 ]
             },

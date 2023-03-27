@@ -8,7 +8,7 @@ export const carriersSlice = createSlice({
   initialState: CARRIERS,
   reducers: {
     addCarrier: (state: ICarriers, action: PayloadAction<{id: string}>) => {
-        let newCarrier = CARRIERS.find((carrier) => carrier.id.$oid === action.payload.id)
+        let newCarrier = CARRIERS.find((carrier) => carrier.id.$oid.toLocaleUpperCase() === action.payload.id.toLocaleUpperCase())
         if (newCarrier) state.push(newCarrier)
     },
   },
@@ -18,6 +18,6 @@ export const { addCarrier } = carriersSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCarriers = (state: ICarriers): ICarriers => state
-export const selectCarrier = (state: ICarriers, id: string): ICarrier | undefined => state.find((carrier) => carrier.id.$oid === id)
+export const selectCarrier = (state: ICarriers, id: string): ICarrier | undefined => state.find((carrier) => carrier.id.$oid.toLocaleUpperCase() === id.toLocaleUpperCase())
 
 export default carriersSlice.reducer

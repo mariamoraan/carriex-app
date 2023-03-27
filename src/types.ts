@@ -9,6 +9,7 @@ export interface IParcel {
     itemsCount: number,
     items: {"$oid": string}[],
     carrier?: string,
+    driverSignature?: string,
     isDelivered?: boolean,
 }
 
