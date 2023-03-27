@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import { IOrderElem } from "../types";
-import { getNumberOfItemsFromOrder } from "../utils/parcels";
+import { ICarrier } from "../types";
 import { ICONS } from "./Icons";
 
 const Wrapper = styled.div`
@@ -42,16 +41,16 @@ const Delivery = styled.p<{isDelivered: boolean}>`
     font-size: 12px;
 `
 
-export const OrderItem = (props: IOrderElem) => {
-    const {id, company, isDelivered} = props
+export const OrderItem = ({carrier, isDelivered, itemsNumber}:{carrier: ICarrier, isDelivered: boolean, itemsNumber: number}) => {
+    const {id, companyName} = carrier
     const [t] = useTranslation()
     return (
         <Wrapper>
             <Icon>{ICONS.TRUCK_ICON}</Icon>
             <CentralInfo>
-                <Title>{`${id} ${t("parcel_list")}`}</Title>
-                <Description>{company}</Description>
-                <Description>{t("items_to_be_picked_up", {items_number: getNumberOfItemsFromOrder(props)})}</Description>
+                <Title>{`${(id.$oid).toLocaleUpperCase()} ${t("parcel_list")}`}</Title>
+                <Description>{companyName}</Description>
+                <Description>{t("items_to_be_picked_up", {items_number: itemsNumber})}</Description>
             </CentralInfo>
             {isDelivered != null ? <Delivery isDelivered={isDelivered}>{t(isDelivered ? "delivered": "delivery")}</Delivery> : null}
         </Wrapper>

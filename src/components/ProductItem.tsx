@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { IProductElem } from "../types";
+import { IItem } from "../types";
+import { getItemUnits } from "../utils/units";
 import { ICONS } from "./Icons";
 
 const Wrapper = styled.div`
@@ -14,6 +15,7 @@ const CentralInfo = styled.div`
 
 const Title = styled.p`
     font-size: 18px;
+    text-transform: uppercase;
     color: #534F5A;
 `
 
@@ -35,14 +37,14 @@ const Icon = styled.div`
     border-radius: 8px;
 `
 
-export const ProductItem = (props: IProductElem) => {
-    const {title, weight, icon} = props
+export const ProductItem = (props: IItem) => {
+    const {weigth, type, id} = props
     return (
         <Wrapper>
-            <Icon>{icon ? ICONS[icon] : null}</Icon>
+            <Icon>{ICONS[type]}</Icon>
             <CentralInfo>
-                <Title>{title}</Title>
-                <Description>{weight}</Description>
+                <Title>{id.$oid}</Title>
+                <Description>{weigth}{getItemUnits(type)}</Description>
             </CentralInfo>
         </Wrapper>
     )

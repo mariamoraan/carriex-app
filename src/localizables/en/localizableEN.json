@@ -4,10 +4,13 @@
     "delivered": "Delivered",
     "carriers_will_pick_up": "{{items_number}} carriers will pick up the parcel",
     "carriers_picked_up": "{{items_number}} carriers picked up the parcel",
+    "carrier_will_pick_up": "{{items_number}} carrier will pick up the parcel",
+    "carrier_picked_up": "{{items_number}} carrier picked up the parcel",
     "items_to_be_picked_up": "{{items_number}} items to be picked up",
     "parcel_list": "Parcel List",
     "parcel_lists": "Parcel Lists",
     "items": "{{items_number}} items",
+    "item": "{{items_number}} item",
     "today": "today",
     "on_date": "on",
     "parcel_information": "Parcel Information",
@@ -22,5 +25,7 @@
     "try_to_add_first_parcel": "Add your first parcel",
     "no_parcels_here": "No parcels here",
     "try_to_add_first_product": "Add your first product",
-    "no_products_here": "No products here"
+    "no_products_here": "No products here",
+    "G_UNIT": "g",
+    "KG_UNIT": "kg"
 }

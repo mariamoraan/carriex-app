@@ -7,7 +7,7 @@ import { AddButton } from "../components/AddButton";
 import { BottomMenu } from '../components/BottomMenu';
 import { Button } from '../components/Button';
 import { Form } from '../components/Form';
-import { ILabeledInput } from "../components/InputWithLabel";
+import { ILabeledInput, INPUT_TYPES } from "../components/InputWithLabel";
 import { List } from "../components/List";
 import { ParcelItem } from "../components/ParcelItem";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
@@ -86,17 +86,17 @@ const NavLink = styled(Link)`
 const ParcelLists = () => {
     const [t] = useTranslation()
     const dispatch = useAppDispatch()
-    let defaultNewParcelData: {key: string, date: string} = {key: "", date: (new Date()).toISOString().split('T')[0]}
+    let defaultNewParcelData: {key: string, carrier: string} = {key: "", carrier: ""}
     const parcels = useAppSelector((state) => state.parcels)
+    const carrierIds = useAppSelector((state) => state.carriers.map((carrier) => ({value: carrier.id.$oid, text: carrier.id.$oid.toLocaleUpperCase()})))
     const hasParcels = Object.keys(parcels).length > 0
 
-    const [newParcel, setNewParcel] = useState<{key: string, date: string}>(defaultNewParcelData)
+    const [newParcel, setNewParcel] = useState<{key: string, carrier: string}>(defaultNewParcelData)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
 
     const handleSubmit = (event: FormEvent<HTMLElement>) => {
         event.preventDefault()
-        let parsedDate = JSON.stringify(new Date(newParcel.date))
-        dispatch(parcelsSlice.actions.addParcel({id: newParcel.key, date: parsedDate}))
+        dispatch(parcelsSlice.actions.addParcel({id: newParcel.key, carrier: newParcel.carrier}))
         setNewParcel(defaultNewParcelData)
         setIsMenuOpen(false)
     }
@@ -111,12 +111,13 @@ const ParcelLists = () => {
             required: true,
         },
         {
-            name: "parcelDate", 
-            onChange: (e) => setNewParcel((prev) => ({...prev, date: e.target.value})), 
-            labelText: "Pickup Date", 
-            inputType: "date", 
-            inputValue: newParcel.date,
+            name: "carrierId", 
+            onChange: (e) => setNewParcel((prev) => ({...prev, carrier: e.target.value})), 
+            labelText: "Carrier ID", 
+            inputType: INPUT_TYPES.SELECT, 
+            inputValue: newParcel.carrier,
             required: true,
+            options: carrierIds
         },
     ]
     
@@ -127,8 +128,8 @@ const ParcelLists = () => {
             { hasParcels ?
                 <ListWrapper>
                     <List childrens={Object.values(parcels).map((parcel) => ({
-                        key: parcel.key,
-                        elem: <NavLink to={`parcel/${parcel.key}`}><ParcelItem  {...parcel}/></NavLink>
+                        key: parcel.id.$oid,
+                        elem: <NavLink to={`parcel/${parcel.id.$oid}`}><ParcelItem  {...parcel}/></NavLink>
                     }))} />
                 </ListWrapper>
                 :

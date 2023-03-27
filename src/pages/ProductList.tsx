@@ -7,9 +7,11 @@ import noResults from "../assets/no-results.png";
 import { BottomMenu } from '../components/BottomMenu';
 import { Button } from '../components/Button';
 import { ComposedForm, IComposedForm } from '../components/ComposedForm';
+import { INPUT_TYPES } from '../components/InputWithLabel';
 import { InteractiveMessage } from '../components/InteractiveMessage';
 import { List } from '../components/List';
 import { ProductItem } from '../components/ProductItem';
+import { ITEMS } from '../data/items';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { parcelsSlice } from '../redux/reducers/parcelsReducer';
 
@@ -87,20 +89,22 @@ const BottomWrapper = styled.div`
 let defaultDelivery: {driverName: string, driverLicensePlate: string, driverSignature: string} = {driverName: "", driverLicensePlate: "", driverSignature: ""}
 
 const ProductList = () => {
-    let {parcel, order} = useParams()
+    let {parcel} = useParams()
     const [t] = useTranslation()
     const dispatch = useAppDispatch()
     const navigate = useNavigate();
-    const parcels = useAppSelector((state) => state.parcels)
-    let hasProducts = parcel && order && parcels[parcel].orders[order].products && Object.keys(parcels[parcel].orders[order].products).length > 0
+    const currentParcel = useAppSelector((state) => state.parcels.find((parcelItem) => parcelItem.id.$oid === parcel))
+    const itemIds = currentParcel?.items.map((item) => item.$oid)
+    const products = ITEMS.filter((product) => itemIds?.includes(product.id.$oid))
+    let hasProducts = currentParcel && currentParcel?.itemsCount > 0
 
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [delivery, setDelivery] = useState<{driverName: string, driverLicensePlate: string, driverSignature: string}>(defaultDelivery)
     const [showDialog, setShowDialog] = useState(false)
 
     const getCurrentOrderIsDelivered = (): boolean => {
-        if(!parcel || !order) return false
-        return parcels[parcel].orders[order].isDelivered
+        if(!hasProducts) return false
+        return currentParcel?.isDelivered || false
     }
     
     const handleSubmitSubForm = (event: FormEvent<HTMLElement>) => {
@@ -109,8 +113,8 @@ const ProductList = () => {
 
     const handleSubmit = (event: FormEvent<HTMLElement>) => {
         event.preventDefault()
-        if (!parcel || !order) return
-        dispatch(parcelsSlice.actions.deliverOrder({parcelId: parcel, orderId: order, driverName: delivery.driverName, driverLicensePlate: delivery.driverLicensePlate}))
+        if (!currentParcel) return
+        dispatch(parcelsSlice.actions.setParcelToDelivered({id: currentParcel?.id.$oid}))
         setDelivery(defaultDelivery)
         setIsMenuOpen(false)
         setShowDialog(true)
@@ -118,7 +122,7 @@ const ProductList = () => {
 
     const handleCloseDialog = () => {
         setShowDialog(false)
-        navigate(`/parcel/${parcel}`)
+        navigate(-1)
     }
 
     const composedForm: IComposedForm = {
@@ -153,7 +157,7 @@ const ProductList = () => {
                         name: "driverSignature", 
                         onChange: (e) => setDelivery((prev) => ({...prev, driverSignature: e.target.value})), 
                         labelText: "Driver's signature", 
-                        inputType: "CANVAS", 
+                        inputType: INPUT_TYPES.CANVAS, 
                         inputValue: delivery.driverSignature,
                         required: true,
                     },
@@ -167,15 +171,15 @@ const ProductList = () => {
         <PageWrapper>
             <TitleWrapper onClick={() => navigate(-1)}>
                 <ArrowBackIcon />
-                <Title>{`${order} ${t("parcel_list")}`}</Title>
+                <Title>{`${currentParcel?.id.$oid} ${t("parcel_list")}`}</Title>
             </TitleWrapper>
             <MiddleWrapper>
             {
-                    parcel && order && parcels[parcel].orders[order].products && Object.keys(parcels[parcel].orders[order].products).length > 0 ?
+                    currentParcel?.items ?
                     <ListWrapper>
                         
-                            <List childrens={Object.values(parcels[parcel].orders[order].products).map((product) => ({
-                                key: product.id,
+                            <List childrens={products.map((product) => ({
+                                key: product.id.$oid,
                                 elem: <ProductItem  {...product}/>
                             }))} />
                             

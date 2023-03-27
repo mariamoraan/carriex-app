@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
+import carriersReducer from './reducers/carriersReducer'
 import parcelsReducer from './reducers/parcelsReducer'
 // ...
 
 const store = configureStore({
   reducer: {
     parcels: parcelsReducer,
+    carriers: carriersReducer,
   },
 })
 

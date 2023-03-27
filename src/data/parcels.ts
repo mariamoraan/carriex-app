@@ -1,35 +1,27 @@
-import { COMPUTER_ICON, PHONE_ICON, WATCH_ICON } from "../components/Icons";
-import { IParcel, IParcelElem, IParcelElemA } from "../types";
+import { IParcels } from "../types";
 
 
-const PARCEL1: IParcelElem = {
-    key: "DWSAZFCEDSFDESZFE",
-        carriers: 5,
-        date: JSON.stringify(new Date('03/20/2021')),
-        orders: {
-            SK16812356 : {
-                id: "SK16812356",
-                company: "Seur",
-                isDelivered: false,
-                products: {
-                    EDSFASLEDFKASEFKDR: {id: "EDSFASLEDFKASEFKDR", title: "FSDACSASDCS", weight: "100g", icon: COMPUTER_ICON},
-                    HTHDTFHDHTDTHBTDTH: {id: "HTHDTFHDHTDTHBTDTH", title: "FSDACSASDCS", weight: "100g", icon: PHONE_ICON},
-                    DFSDOIFJSDFJSDFJSF: {id: "DFSDOIFJSDFJSDFJSF", title: "FSDACSASDCS", weight: "100g", icon: WATCH_ICON}
-                }
-            },
-            GFRGDFGVDF : {
-                id: "GFRGDFGVDF",
-                company: "Seur",
-                isDelivered: true,
-                products: {
-                    EDSFASLEDFKASEF: {id: "EDSFASLEDFKASEF", title: "FSDACSASDCS", weight: "100g", icon: WATCH_ICON},
-                    HTHDTFHDHTDTHBTDTH: {id: "HTHDTFHDHTDTHBTDTH", title: "FSDACSASDCS", weight: "100g", icon: PHONE_ICON}
-                }
-            }
-        }
-}
+export const STARTER_PARCELS: IParcels = [
+    {
+        "id": {
+          "$oid": "641db7b2fc13"
+        },
+        "deliveryAdress": "St. Marina, 54, Barcelona",
+        "deliveryDate": "3/27/2023",
+        "pickupAdress": "St. Solsones, 2, Barcelona",
+        "pickupDate": "3/25/2023",
+        "itemsCount": 1,
+        "items": [
+          {
+            "$oid": "fc13ae2238000168"
+          }
+        ],
+        "carrier": "het32r0g0u78"
+    }
+]
 
-export const PARCELS_ITEMS: IParcelElemA[] = [{
+export const PARCELS_ITEMS: IParcels = [
+    {
       "id": {
         "$oid": "641db7b2fc13"
       },
@@ -383,8 +375,5 @@ export const PARCELS_ITEMS: IParcelElemA[] = [{
         }
       ]
     }
-]
+  ]
 
-export const PARCELS: IParcel = {
-    DWSAZFCEDSFDESZFE: PARCEL1
-}

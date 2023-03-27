@@ -1,32 +1,38 @@
-export interface IParcel {[key: string]: IParcelElem}
+export type IParcels = IParcel[]
 
-export interface IParcelElem {
-    key: string,
-    date?: string,
-    orders: IOrder,
-    carriers?: number,
-}
-
-export interface IParcelElemA {
+export interface IParcel {
     id: {"$oid": string},
     deliveryAdress: string,
     deliveryDate: string,
     pickupAdress: string,
     pickupDate: string,
     itemsCount: number,
-    items: {"$oid": string}[]
+    items: {"$oid": string}[],
+    carrier?: string,
+    isDelivered?: boolean,
 }
 
-export interface IOrder {[key: string]: IOrderElem}
+export type ICarriers = ICarrier[]
 
-export interface IOrderElem {
-    id: string,
-    company: string,
-    isDelivered: boolean,
-    products: IProduct,
-    driverName?: string,
-    driverLicensePlate?: string,
+export interface ICarrier {
+    id:{"$oid":string},
+    companyName:string,
+    driver:string,
+    licensePlate:string, 
+    centerAdress:string,
 }
+
+
+export type IItems = IItem[]
+
+export interface IItem  {
+    id: {"$oid": string},
+    type: string,
+    model:string,
+    price: number,
+    weigth: number
+}
+
 export interface IProduct {[key: string]: IProductElem}
 
 export interface IProductElem {

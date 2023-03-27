@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import { IParcelElem } from "../types";
-import { getNumberOfItemsFromParcel, useDateLocaleString, usePickUpDateString } from "../utils/parcels";
+import { IParcel } from "../types";
+import { useDateLocaleString, usePickUpDateString } from "../utils/parcels";
 
 const Wrapper = styled.div`
     display: flex;
@@ -28,23 +28,17 @@ const Date = styled.p`
     font-size: 12px;
 `
 
-export const ParcelItem = (props: IParcelElem) => {
-    const {date, carriers} = props
+export const ParcelItem = (props: IParcel) => {
+    const {deliveryDate, itemsCount, pickupDate, carrier} = props
     const [t] = useTranslation()
     return (
         <Wrapper>
             <CentralInfo>
-                <Title>{t("parcel_list")} {date ? useDateLocaleString(date) : null}</Title>
-                { 
-                    carriers && date ? 
-                    <Description>
-                        {usePickUpDateString(carriers, date)} 
-                    </Description> 
-                    : null
-                }
-                <Description>{t("items", { items_number: getNumberOfItemsFromParcel(props)})}</Description>
+                <Title>{t("parcel_list")} {useDateLocaleString(pickupDate)}</Title>
+                {carrier ? <Description>{usePickUpDateString(1, pickupDate)}</Description> : null}
+                <Description>{t(`${itemsCount > 1 ? "items" : "item"}`, { items_number: itemsCount})}</Description>
             </CentralInfo>
-            {date ? <Date>{useDateLocaleString(date)}</Date> : null}
+            <Date>{useDateLocaleString(deliveryDate)}</Date>
         </Wrapper>
     )
 }

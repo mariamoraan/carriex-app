@@ -1,19 +1,11 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { FormEvent, useState } from 'react';
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import styled from "styled-components";
 import noResults from "../assets/no-results.png";
-import { AddButton } from '../components/AddButton';
-import { BottomMenu } from '../components/BottomMenu';
-import { Button } from '../components/Button';
-import { Form } from '../components/Form';
-import { ILabeledInput } from '../components/InputWithLabel';
 import { List } from '../components/List';
 import { OrderItem } from '../components/OrderItem';
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { parcelsSlice } from '../redux/reducers/parcelsReducer';
-import { getNumberOfItemsFromParcel } from '../utils/parcels';
+import { useAppSelector } from '../redux/hooks';
 
 const PageWrapper = styled.div`
     max-width: 1000px;
@@ -87,53 +79,13 @@ const NavLink = styled(Link)`
     text-decoration: none;
 `
 
-const BottomWrapper = styled.div`
-    padding: 24px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`
-
-
-let defaultNewOrderData: {orderId: string, company: string} = {orderId: "", company: ""}
-
 const OrderLists = () => {
     let {parcel} = useParams()
     const [t] = useTranslation()
-    const dispatch = useAppDispatch()
     const navigate = useNavigate();
-    const parcels = useAppSelector((state) => state.parcels)
-    const hasOrders =  parcel && parcels[parcel] && Object.keys(parcels[parcel].orders).length > 0
-
-    const [isMenuOpen, setIsMenuOpen] = useState(false)
-    const [newOrder, setNewOrder] = useState<{orderId: string, company: string}>(defaultNewOrderData)
-
-    const handleSubmit = (event: FormEvent<HTMLElement>) => {
-        event.preventDefault()
-        if (!parcel) return
-        dispatch(parcelsSlice.actions.addOrder({parcelId: parcel, orderId: newOrder.orderId, company: newOrder.company}))
-        setNewOrder(defaultNewOrderData)
-        setIsMenuOpen(false)
-    }
-
-    const formInputs: ILabeledInput[] = [
-        {
-            name: "orderId", 
-            onChange: (e) => setNewOrder((prev) => ({...prev, orderId: e.target.value})) , 
-            labelText: "Order ID", 
-            inputType: "text", 
-            inputValue: newOrder.orderId,
-            required: true,
-        },
-        {
-            name: "company", 
-            onChange: (e) => setNewOrder((prev) => ({...prev, company: e.target.value})) , 
-            labelText: "Company", 
-            inputType: "text", 
-            inputValue: newOrder.company,
-            required: true,
-        },
-    ]
+    const currentParcel = useAppSelector((state) => state.parcels.find((parcelItem) => parcelItem.id.$oid === parcel))
+    let carriers = useAppSelector((state) => state.carriers.filter((carrier) => carrier.id.$oid === currentParcel?.carrier))
+    const hasCarriers =  currentParcel?.itemsCount && currentParcel.itemsCount > 0
 
     return (
         <PageWrapper>
@@ -143,14 +95,20 @@ const OrderLists = () => {
             </TitleWrapper>
             <MiddleWrapper>
             {
-                    parcel && parcels[parcel] && Object.keys(parcels[parcel].orders).length > 0 ?
+                hasCarriers ?
                     <>
-                    <Description>{t("items_to_be_picked_up", { items_number: getNumberOfItemsFromParcel(parcels[parcel])})}</Description>
+                    <Description>{t("items_to_be_picked_up", { items_number: 4})}</Description>
                     <ListWrapper>
                         
-                            <List childrens={Object.values(parcels[parcel].orders).map((order) => ({
-                                key: order.id,
-                                elem: <NavLink to={`order/${order.id}`}><OrderItem  {...order}/></NavLink>
+                            <List childrens={carriers.map((order) => ({
+                                key: order.id.$oid,
+                                elem: <NavLink to={`order/${order.id.$oid}`}>
+                                        <OrderItem  
+                                        carrier={order} 
+                                        isDelivered={currentParcel.isDelivered || false}
+                                        itemsNumber={currentParcel.itemsCount}
+                                        />
+                                      </NavLink>
                             }))} />
                             
                         
@@ -160,24 +118,9 @@ const OrderLists = () => {
                 <NoItemsWrapper>
                     <Image src={noResults} />
                     <Title>{t("no_orders_here")}</Title>
-                    <Button text={t("try_to_add_first_order")} onClick={() => setIsMenuOpen(true)} />
                 </NoItemsWrapper>
             }
             </MiddleWrapper>
-            <BottomWrapper>
-                {hasOrders ? <AddButton onClick={() => setIsMenuOpen(true)} /> : null}
-                <BottomMenu 
-                isMenuOpen={isMenuOpen}
-                setIsMenuOpen={setIsMenuOpen}
-                afterClose={() => setNewOrder(defaultNewOrderData)}
-                >
-                <Form 
-                    title={t("order_information")}
-                    handleSubmit={handleSubmit}
-                    labeledInputs={formInputs}
-                />
-                </BottomMenu>
-            </BottomWrapper>
         </PageWrapper>
     )
 }

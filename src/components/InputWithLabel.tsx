@@ -1,6 +1,7 @@
 import { ChangeEvent } from "react";
 import styled from "styled-components";
 import { CanvasInput } from "./CanvasInput";
+import { SelectInput } from "./SelectInput";
 
 const Wrapper = styled.div`
     margin: 12px 0;
@@ -26,18 +27,31 @@ const Input = styled.input`
 
 export type ILabeledInput = {
     name: string,
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void,
+    onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
     labelText: string,
     inputType: string,
     inputValue: any,
     required?: boolean,
+    options?: {value: string, text: string}[]
+}
+
+export const INPUT_TYPES = {
+    CANVAS: "CANVAS",
+    SELECT: "SELECT"
 }
 
 export const InputWithLabel = (props: ILabeledInput) => {
     const {name, onChange, labelText, inputType, inputValue, required} = props
     switch(inputType) {
-        case "CANVAS":
+        case INPUT_TYPES.CANVAS:
             return (<CanvasInput {...props} />)
+        case INPUT_TYPES.SELECT: 
+            return (
+            <Wrapper>
+                <Label htmlFor={name}>{labelText}</Label>
+                <SelectInput {...props} />
+            </Wrapper>
+            )
         default:
             return (
                 <Wrapper>
