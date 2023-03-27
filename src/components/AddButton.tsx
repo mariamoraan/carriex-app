@@ -13,9 +13,9 @@ const Wrapper = styled.button`
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 `
 
-export const AddButton = () => {
+export const AddButton = ({onClick}: {onClick: () => void}) => {
     return (
-        <Wrapper><AddIcon /></Wrapper>
+        <Wrapper><AddIcon onClick={onClick} /></Wrapper>
     )
 }
 

@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { IParcelElem } from "../types";
-import { getNumberOfItemsFromParcel, usePickUpDateString } from "../utils/parcels";
+import { getNumberOfItemsFromParcel, useDateLocaleString, usePickUpDateString } from "../utils/parcels";
 
 const Wrapper = styled.div`
     display: flex;
@@ -30,11 +30,11 @@ const Date = styled.p`
 
 export const ParcelItem = (props: IParcelElem) => {
     const {date, carriers} = props
-    const [t, i18n] = useTranslation()
+    const [t] = useTranslation()
     return (
         <Wrapper>
             <CentralInfo>
-                <Title>{t("parcel_list")} {date ? date.toLocaleDateString(i18n.language) : null}</Title>
+                <Title>{t("parcel_list")} {date ? useDateLocaleString(date) : null}</Title>
                 { 
                     carriers && date ? 
                     <Description>
@@ -44,7 +44,7 @@ export const ParcelItem = (props: IParcelElem) => {
                 }
                 <Description>{t("items", { items_number: getNumberOfItemsFromParcel(props)})}</Description>
             </CentralInfo>
-            {date ? <Date>{date.toLocaleDateString(i18n.language)}</Date> : null}
+            {date ? <Date>{useDateLocaleString(date)}</Date> : null}
         </Wrapper>
     )
 }

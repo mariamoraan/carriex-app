@@ -9,5 +9,18 @@
     "parcel_lists": "Parcel Lists",
     "items": "{{items_number}} items",
     "today": "today",
-    "on_date": "on"
+    "on_date": "on",
+    "parcel_information": "Parcel Information",
+    "order_information": "Order Information",
+    "delivery_information": "Delivery Information",
+    "drivers_signature": "Driver's signature",
+    "save": "Save",
+    "parcel_successfully_delivered":"Parcel successfully delivered to the carrier",
+    "go_to_parcel_list": "Go to parcel list",
+    "no_orders_here": "No orders here",
+    "try_to_add_first_order": "Add your first order",
+    "try_to_add_first_parcel": "Add your first parcel",
+    "no_parcels_here": "No parcels here",
+    "try_to_add_first_product": "Add your first product",
+    "no_products_here": "No products here"
 }

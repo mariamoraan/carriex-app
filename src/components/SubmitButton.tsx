@@ -1,9 +1,8 @@
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 
-const ButtonWrapper = styled.button`
-    margin: 12px 24px;
+const SubmitButtonWrapper = styled.input`
     padding: 12px;
-    width: calc(100% - 48px);
     display: flex;
     flex: 1;
     justify-content: center;
@@ -19,14 +18,9 @@ const ButtonWrapper = styled.button`
     font-weight: bold;
 `
 
-type Props = {
-    onClick: () => void,
-    text: string,
-}
-
-export const Button = (props: Props) => {
-    const {onClick, text}= props
+export const SubmitButton = ({text}: {text?: string}) => {
+    const [t] = useTranslation()
     return (
-        <ButtonWrapper onClick={onClick}>{text}</ButtonWrapper>
+        <SubmitButtonWrapper type="submit" value={text || t("save") || "Save"} />
     )
 }

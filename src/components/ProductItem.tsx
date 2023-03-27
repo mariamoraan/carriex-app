@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { IProductElem } from "../types";
+import { ICONS } from "./Icons";
 
 const Wrapper = styled.div`
     display: flex;
@@ -38,7 +39,7 @@ export const ProductItem = (props: IProductElem) => {
     const {title, weight, icon} = props
     return (
         <Wrapper>
-            <Icon>{icon}</Icon>
+            <Icon>{icon ? ICONS[icon] : null}</Icon>
             <CentralInfo>
                 <Title>{title}</Title>
                 <Description>{weight}</Description>
