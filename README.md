@@ -24,5 +24,12 @@ yarn start
 
 ## Availability
 
-The project is deployed here: [link]()
-```
+The project is deployed here: [link](https://carriex-app.vercel.app/)
+
+## Project Technologies
+
+- Material Icons. For icons.
+- Styled Components. For styling.
+- i18n. For translations.
+- Typescript. For types.
+- Redux. For app state management.
