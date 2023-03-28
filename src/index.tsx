@@ -16,9 +16,9 @@ const AppWrapper = styled.div`
   background-image: url("https://img.freepik.com/free-vector/vibrant-fluid-gradient-background-with-curvy-shapes_1017-32108.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
-  max-height: -webkit-fill-available;
+  height: ${window.innerHeight}px;
   @media (min-width: 1000px) {
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
