@@ -33,3 +33,4 @@ The project is deployed here: [link](https://carriex-app.vercel.app/)
 - i18n. For translations.
 - Typescript. For types.
 - Redux. For app state management.
+- Regex. For validate parcel id.
