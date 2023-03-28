@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import { CARRIERS } from '../../data/carriers'
 import { ICarrier, ICarriers } from '../../types'
 
@@ -7,14 +7,9 @@ export const carriersSlice = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   initialState: CARRIERS,
   reducers: {
-    addCarrier: (state: ICarriers, action: PayloadAction<{id: string}>) => {
-        let newCarrier = CARRIERS.find((carrier) => carrier.id.$oid.toLocaleUpperCase() === action.payload.id.toLocaleUpperCase())
-        if (newCarrier) state.push(newCarrier)
-    },
+
   },
 })
-
-export const { addCarrier } = carriersSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCarriers = (state: ICarriers): ICarriers => state

@@ -31,7 +31,7 @@ export const Form = (props: IForm) => {
             <Title>{title}</Title>
             <FormWrapper onSubmit={(e) => handleSubmit(e)}>
                 {
-                    labeledInputs.map(({name, onChange, labelText, inputType, inputValue, required, options, onChangeString}) => (
+                    labeledInputs.map(({name, onChange, labelText, inputType, inputValue, required, options, onChangeString, pattern}) => (
                         <InputWithLabel
                         key={name}
                         name={name}
@@ -42,6 +42,7 @@ export const Form = (props: IForm) => {
                         required={required}
                         options={options}
                         onChangeString={onChangeString}
+                        pattern={pattern}
                     />
                     ))  
                 }

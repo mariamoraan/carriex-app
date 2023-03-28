@@ -34,11 +34,12 @@ export type ILabeledInput = {
     inputType: string,
     inputValue: any,
     required?: boolean,
-    options?: {value: string, text: string}[]
+    options?: {value: string, text: string}[],
+    pattern?: string
 }
 
 export const InputWithLabel = (props: ILabeledInput) => {
-    const {name, onChange, labelText, inputType, inputValue, required} = props
+    const {name, onChange, labelText, inputType, inputValue, required, pattern} = props
     switch(inputType) {
         case INPUT_TYPES.CANVAS:
             return (<CanvasInput {...props} />)
@@ -53,7 +54,14 @@ export const InputWithLabel = (props: ILabeledInput) => {
             return (
                 <Wrapper>
                     <Label htmlFor={name}>{labelText}</Label>
-                    <Input value={inputValue} required={required} type={inputType} name={name} onChange={(e) => onChange(e)} />
+                    <Input 
+                    value={inputValue} 
+                    required={required} 
+                    type={inputType} 
+                    name={name} 
+                    pattern={pattern ? `${pattern}` : undefined} 
+                    onChange={(e) => onChange(e)} 
+                    />
                 </Wrapper>
             )
     } 

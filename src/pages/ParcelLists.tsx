@@ -81,10 +81,10 @@ const NavLink = styled(Link)`
 const ParcelLists = () => {
     const [t] = useTranslation()
     const dispatch = useAppDispatch()
-    let defaultNewParcelData: {key: string, carrier: string} = {key: "", carrier: ""}
     const parcels = useAppSelector((state) => state.parcels)
     const carrierIds = useAppSelector((state) => state.carriers.map((carrier) => ({value: carrier.id.$oid, text: carrier.id.$oid.toLocaleUpperCase()})))
     const hasParcels = Object.keys(parcels).length > 0
+    let defaultNewParcelData: {key: string, carrier: string} = {key: "", carrier: carrierIds[0].value}
 
     const [newParcel, setNewParcel] = useState<{key: string, carrier: string}>(defaultNewParcelData)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -104,6 +104,7 @@ const ParcelLists = () => {
             inputType: "text", 
             inputValue: newParcel.key,
             required: true,
+            pattern: "[A-Za-z0-9]{12}"
         },
         {
             name: "carrierId", 
@@ -112,7 +113,7 @@ const ParcelLists = () => {
             inputType: INPUT_TYPES.SELECT, 
             inputValue: newParcel.carrier,
             required: true,
-            options: carrierIds
+            options: carrierIds,
         },
     ]
     

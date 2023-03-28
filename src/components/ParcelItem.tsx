@@ -29,13 +29,13 @@ const Date = styled.p`
 `
 
 export const ParcelItem = (props: IParcel) => {
-    const {deliveryDate, itemsCount, pickupDate, carrier} = props
+    const {deliveryDate, itemsCount, pickupDate} = props
     const [t] = useTranslation()
     return (
         <Wrapper>
             <CentralInfo>
                 <Title>{t("parcel_list")} {useDateLocaleString(pickupDate)}</Title>
-                {carrier ? <Description>{usePickUpDateString(1, pickupDate)}</Description> : null}
+                <Description>{usePickUpDateString(1, pickupDate)}</Description>
                 <Description>{t(`${itemsCount > 1 ? "items" : "item"}`, { items_number: itemsCount})}</Description>
             </CentralInfo>
             <Date>{useDateLocaleString(deliveryDate)}</Date>

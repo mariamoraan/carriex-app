@@ -171,7 +171,7 @@ const ProductList = () => {
             </TitleWrapper>
             <MiddleWrapper>
             {
-                    currentParcel?.items ?
+                    currentParcel?.items && currentParcel.itemsCount > 0 ?
                     <ListWrapper>
                         
                             <List childrens={products.map((product) => ({

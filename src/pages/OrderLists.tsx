@@ -2,7 +2,6 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import styled from "styled-components";
-import noResults from "../assets/no-results.png";
 import { List } from '../components/List';
 import { OrderItem } from '../components/OrderItem';
 import { useAppSelector } from '../redux/hooks';
@@ -54,23 +53,6 @@ const ListWrapper = styled.div`
     scroll-behaviour: smooth;
 `
 
-const NoItemsWrapper = styled.div`
-    transform: translateY(50%);
-    margin: 24px;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    border-radius: 8px;
-`
-
-const Image = styled.img`
-    height: 80px;
-`
-
 const NavLink = styled(Link)`
     text-decoration: none;
 `
@@ -81,7 +63,6 @@ const OrderLists = () => {
     const navigate = useNavigate();
     const currentParcel = useAppSelector((state) => state.parcels.find((parcelItem) => parcelItem.id.$oid === parcel))
     let carriers = useAppSelector((state) => state.carriers.filter((carrier) => carrier.id.$oid === currentParcel?.carrier))
-    const hasCarriers =  currentParcel?.itemsCount && currentParcel.itemsCount > 0
 
     return (
         <PageWrapper>
@@ -91,7 +72,7 @@ const OrderLists = () => {
             </TitleWrapper>
             <MiddleWrapper>
             {
-                hasCarriers ?
+                currentParcel ?
                     <>
                     <Description>{t("items_to_be_picked_up", { items_number: currentParcel.itemsCount})}</Description>
                     <ListWrapper>
@@ -110,11 +91,7 @@ const OrderLists = () => {
                         
                     </ListWrapper>
                     </>
-                : 
-                <NoItemsWrapper>
-                    <Image src={noResults} />
-                    <Title>{t("no_orders_here")}</Title>
-                </NoItemsWrapper>
+                : null
             }
             </MiddleWrapper>
         </PageWrapper>

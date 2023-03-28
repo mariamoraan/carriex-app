@@ -1,25 +1,5 @@
 import { IParcels } from "../types";
 
-
-export const STARTER_PARCELS: IParcels = [
-    {
-        "id": {
-          "$oid": "641db7b2fc13"
-        },
-        "deliveryAdress": "St. Marina, 54, Barcelona",
-        "deliveryDate": "3/27/2023",
-        "pickupAdress": "St. Solsones, 2, Barcelona",
-        "pickupDate": "3/25/2023",
-        "itemsCount": 1,
-        "items": [
-          {
-            "$oid": "fc13ae2238000168"
-          }
-        ],
-        "carrier": "het32r0g0u78"
-    }
-]
-
 export const PARCELS_ITEMS: IParcels = [
     {
       "id": {
@@ -377,3 +357,5 @@ export const PARCELS_ITEMS: IParcels = [
     }
   ]
 
+
+export const STARTER_PARCELS: IParcels = PARCELS_ITEMS.slice(0, PARCELS_ITEMS.length / 2)
