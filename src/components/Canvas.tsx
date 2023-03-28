@@ -20,6 +20,7 @@ const CanvasElem = styled.canvas<{width: number, height: number}>`
     border: 1px solid #A7D0D2;
     background: #BAEAEA;
     border-radius: 12px;
+    touch-action: none;
 `
 
 const height = 200

@@ -358,4 +358,4 @@ export const PARCELS_ITEMS: IParcels = [
   ]
 
 
-export const STARTER_PARCELS: IParcels = PARCELS_ITEMS.slice(0, PARCELS_ITEMS.length / 2)
+export const STARTER_PARCELS: IParcels = []

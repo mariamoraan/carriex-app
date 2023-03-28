@@ -1,5 +1,4 @@
 {
-    "hey": "Heyyy !",
     "delivery": "Delivery",
     "delivered": "Delivered",
     "carriers_will_pick_up": "{{items_number}} carriers will pick up the parcel",
@@ -28,5 +27,9 @@
     "try_to_add_first_product": "Add your first product",
     "no_products_here": "No products here",
     "G_UNIT": "g",
-    "KG_UNIT": "kg"
+    "KG_UNIT": "kg",
+    "parcel_id": "Parcel ID",
+    "carrier_id": "Carrier ID",
+    "drivers_name": "Driver's name",
+    "license_plate": "License plate"
 }

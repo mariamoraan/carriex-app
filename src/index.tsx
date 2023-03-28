@@ -18,6 +18,7 @@ const AppWrapper = styled.div`
   background-size: cover;
   @media (min-width: 1000px) {
     height: 100vh;
+    max-height: -webkit-fill-available;
     display: flex;
     justify-content: center;
     align-items: center;

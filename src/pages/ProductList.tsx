@@ -19,6 +19,7 @@ const PageWrapper = styled.div`
     max-width: 1000px;
     position: relative;
     height: 100vh;
+    max-height: -webkit-fill-available;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -129,7 +130,7 @@ const ProductList = () => {
                     {
                         name: "driverName", 
                         onChange: (e) => setDelivery((prev) => ({...prev, driverName: e.target.value})), 
-                        labelText: "Driver's name", 
+                        labelText: t("drivers_name"), 
                         inputType: "text", 
                         inputValue: delivery.driverName,
                         required: true,
@@ -137,7 +138,7 @@ const ProductList = () => {
                     {
                         name: "driverLicensePlate", 
                         onChange: (e) => setDelivery((prev) => ({...prev, driverLicensePlate: e.target.value})), 
-                        labelText: "License plate", 
+                        labelText: t("license_plate"), 
                         inputType: "text", 
                         inputValue: delivery.driverLicensePlate.toUpperCase(),
                         required: true,
@@ -151,7 +152,7 @@ const ProductList = () => {
                     {
                         name: "driverSignature", 
                         onChange: (e) => setDelivery((prev) => ({...prev, driverSignature: e.target.value})), 
-                        labelText: "Driver's signature", 
+                        labelText: t("drivers_signature"), 
                         inputType: INPUT_TYPES.CANVAS, 
                         inputValue: delivery.driverSignature,
                         required: true,

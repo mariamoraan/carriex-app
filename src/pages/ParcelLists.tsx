@@ -17,6 +17,7 @@ const PageWrapper = styled.div`
     max-width: 1000px;
     position: relative;
     height: 100vh;
+    max-height: -webkit-fill-available;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -100,7 +101,7 @@ const ParcelLists = () => {
         {
             name: "parcelId", 
             onChange: (e) => setNewParcel((prev) => ({...prev, key: e.target.value})), 
-            labelText: "Parcel ID", 
+            labelText: t("parcel_id"), 
             inputType: "text", 
             inputValue: newParcel.key,
             required: true,
@@ -109,7 +110,7 @@ const ParcelLists = () => {
         {
             name: "carrierId", 
             onChange: (e) => setNewParcel((prev) => ({...prev, carrier: e.target.value})), 
-            labelText: "Carrier ID", 
+            labelText: t("carrier_id"), 
             inputType: INPUT_TYPES.SELECT, 
             inputValue: newParcel.carrier,
             required: true,

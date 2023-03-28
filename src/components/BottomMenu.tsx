@@ -15,6 +15,13 @@ const BottomMenuWrapper = styled.div<{isMenuOpen: boolean}>`
     transition: 800ms ease;
 `
 
+const BottomMenuDraggerWrapper = styled.div`
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+
 const BottomMenuDragger = styled.div`
     margin: 12px;
     align-self: center;
@@ -41,21 +48,20 @@ export const BottomMenu = (props: Props) => {
 
     const handleCloseFormByMouse = (e: React.MouseEvent<HTMLDivElement>) => {
         e.preventDefault();
-        if (!isMouseDown || Math.abs(e.movementY) < 5) return
+        if (!isMouseDown) return
         afterClose()
         setIsMenuOpen(false)
-        setIsMouseDown(false)
     }
     
     return (
         <BottomMenuWrapper isMenuOpen={isMenuOpen} >
-            <BottomMenuDragger 
-            onClick={() => afterClose()} 
+            <BottomMenuDraggerWrapper 
             onTouchMove={handleCloseFormByTouchable} 
             onMouseDown={() => setIsMouseDown(true)} 
             onMouseUp={() => setIsMouseDown(false)}
-            onMouseMove={(e) => handleCloseFormByMouse(e)}
-            />
+            onMouseMove={(e) => handleCloseFormByMouse(e)}>
+                <BottomMenuDragger />
+            </BottomMenuDraggerWrapper>
             {children}
         </BottomMenuWrapper>
     )
