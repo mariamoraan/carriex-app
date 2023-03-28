@@ -33,8 +33,13 @@ const getOffsetTop = (element: HTMLElement | null) => {
     return offsetTop % window.innerHeight;
 }
 
-const getOffsetLeft = (element: HTMLElement | null) => {
-    return element?.parentElement?.offsetLeft || 0;
+const getOffsetLeft = (element: HTMLElement | null) => {    
+    let offsetLeft = 0;
+    while(element) {
+      offsetLeft += element.offsetLeft;
+      element = element.parentElement;
+    }
+    return offsetLeft % (window.innerHeight - 48);
 }
 
 type Props = {
@@ -48,13 +53,13 @@ export const Canvas = ({onChange}: Props) => {
     const [isDrawing, setIsDrawing] = useState(false)
     const [width, setWidth] = useState(canvas?.parentElement?.clientWidth || 1)
     const [offsetY, setOffsetY] = useState(getOffsetTop(canvas))
-    const [offsetX, setOffsetX] = useState(getOffsetLeft(canvas))
+    let offsetX = window.innerWidth > 1000 ? getOffsetLeft(canvas) : -1
     
     useEffect(() => { 
         canvas = canvasRef.current
         setWidth(canvas?.parentElement?.clientWidth || 0)
         setOffsetY(getOffsetTop(canvas))
-        setOffsetX(getOffsetLeft(canvas))
+        offsetX = window.innerWidth > 1000 ? getOffsetLeft(canvas) : -1
         const context = canvas?.getContext('2d')
         if (context == null) throw new Error('Could not get context');
         if (canvas) {
