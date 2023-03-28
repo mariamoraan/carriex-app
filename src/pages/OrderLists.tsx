@@ -8,7 +8,7 @@ import { useAppSelector } from '../redux/hooks';
 
 const PageWrapper = styled.div`
     max-width: 1000px;
-    height: 100vh;
+    height: 100%;
     max-height: -webkit-fill-available;
     display: flex;
     flex-direction: column;

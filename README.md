@@ -1,6 +1,6 @@
 # CarrieX App
 
-CarrieX App is a React app that provides the necessary tools to the MediaMarkt  team to being able to:
+CarrieX App is a React app created for [Nuwe & MediaMark hackaton (2023)](https://nuwe.io/dev/competitions/mediamarkt-letsgo-hackathon/MediaMarkt-React-challenge) that provides the necessary tools to the MediaMarkt  team to being able to:
 
 - Add parcels to the parcels list
 - Assign a carrier to a parcel

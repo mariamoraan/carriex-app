@@ -358,4 +358,4 @@ export const PARCELS_ITEMS: IParcels = [
   ]
 
 
-export const STARTER_PARCELS: IParcels = []
+export const STARTER_PARCELS: IParcels = PARCELS_ITEMS

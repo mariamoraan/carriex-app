@@ -18,7 +18,7 @@ import { parcelsSlice } from '../redux/reducers/parcelsReducer';
 const PageWrapper = styled.div`
     max-width: 1000px;
     position: relative;
-    height: 100vh;
+    height: 100%;
     max-height: -webkit-fill-available;
     display: flex;
     flex-direction: column;
