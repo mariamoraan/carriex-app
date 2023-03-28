@@ -34,3 +34,9 @@ The project is deployed here: [link](https://carriex-app.vercel.app/)
 - Typescript. For types.
 - Redux. For app state management.
 - Regex. For validate parcel id.
+
+## Visuals
+
+![Project Image](https://lh4.googleusercontent.com/X7DFu2EbbcDyQpSjIOf_T9rKnzBRlaTCO4l71tl4O60Ltao-Z4wcujg4Xqhqao9FafA=w2400)
+
+For more visuals go to [projects drive](https://drive.google.com/drive/folders/1O_D1jtaNZGfT4HR5heV_22kUcS2gNk1_?usp=share_link)
